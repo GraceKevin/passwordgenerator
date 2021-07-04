@@ -1,3 +1,5 @@
+// Updated code includes reference to https://codepen.io/FlorinPop17/pen/BaBePej?editors=1010
+// Found through https://www.youtube.com/watch?v=duNmhKgtcsI to attempt to replace variable process with functions
 // Assignment code here
 document.querySelector("#generate").addEventListener("click", writePassword);
 
@@ -5,14 +7,12 @@ document.querySelector("#generate").addEventListener("click", writePassword);
 
 // setup constants in place of variables 
 
-const resultElement = document.getElementById('result');
 const lengthElement = document.getElementById('length');
 const uppercaseElement = document.getElementById('uppercase');
 const lowercaseElement = document.getElementById('lowercase');
 const numbersElement = document.getElementById('numbers');
 const symbolsElement = document.getElementById('symbols');
 const generateBtn = document.getElementById('generate');
-const clipboard = document.getElementById('clipboard');
 
 const randomFunc = {
   lower: getRandomLower,
@@ -23,7 +23,7 @@ const randomFunc = {
 
 // Prompt to confirm how many characters the user would like in their password
 function generatePassword(lower, upper, number, symbols, length) {
-  const lengthElement = (prompt("How many characters would you like your password to contain?"));
+  const lengthElement = (prompt("Please enter the length of the password from 8 to 128"));
 
   // Loop if answer is outside the parameters 
   while(lengthElement <= 7 || lengthElement >= 128) {
@@ -44,7 +44,7 @@ function generatePassword(lower, upper, number, symbols, length) {
       alert("Please select whether you would like to include the parameter");
       
       // Assign an action to the password parameters
-      var passwordCharacters = [number + symbols + upper + lower + length]
+      var passwordCharacters = [number + symbols + upper + lower]
       
     if (symbolsElement) {
       passwordCharacters = passwordCharacters.concat(symbols)
@@ -61,15 +61,14 @@ function generatePassword(lower, upper, number, symbols, length) {
     if (uppercaseElement) {
       passwordCharacters = passwordCharacters.concat(upper)
     }
-
-      // Empty string to be filled based on for loop selecting random characters from the array
-      var randomPassword = ""
-      
-      for (var i = 0; i < lengthElement; i++) {
-        randomPassword = randomPassword + passwordCharacters[Math.floor(Math.random() * passwordCharacters.length)];
-        console.log(randomPassword)
-      }
-      return randomPassword;
+}
+// Empty string to be filled based on for loop selecting random characters from the array
+function randomPassword(){
+  for (var i = 0; i < lengthElement; i++) {
+  randomPassword = randomPassword + passwordCharacters[Math.floor(Math.random() * passwordCharacters.length)];
+  console.log(randomPassword)
+  }
+  return randomPassword;
 }
 
 function getRandomLower() {
@@ -95,5 +94,4 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
